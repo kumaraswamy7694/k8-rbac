@@ -14,6 +14,16 @@ rules:
   verbs: ["*"] #action on resources like create, read , update and read.
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: roboshop-cluster-reader
+rules:
+- apiGroups: ["v1","apps/v1",""]
+  resources: ["secrets","nodes","namespaces","persistentvolumes"]
+  verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
 # This role binding allows "jane" to read pods in the "default" namespace.
 # You need to already have a Role named "pod-reader" in that namespace.
 kind: RoleBinding
@@ -46,9 +56,9 @@ data:
       username: ramesh
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2023-11-21T01:43:14Z"
+  creationTimestamp: "2025-03-18T05:50:51Z"
   name: aws-auth
   namespace: kube-system
-  resourceVersion: "8642"
+  resourceVersion: "1416"
   uid: 692cbe3f-3dbd-45ec-bf1d-9f7335539550
 
